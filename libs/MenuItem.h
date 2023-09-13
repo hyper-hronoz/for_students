@@ -1,23 +1,22 @@
 #pragma once
 #include "iostream"
-#include "functional"
 
 class MenuItem {
- private:
-    std::string title;
-    int id;
-    std::function<void()> callback;
+	private:
+		std::string title;
+		int id;
+		void (*callback)();
 
- public:
-    MenuItem(int id, std::string title);
+	public:
+		MenuItem(int id, std::string title);
 
-    MenuItem(int id, std::string title, std::function<void()> callback);
+		MenuItem(int id, std::string title, void (*callback)());
 
-    std::string getTitle();
+		std::string getTitle();
 
-    int getId();
+		int getId();
 
-    void executeCallback();
+		void executeCallback();
 
-    ~MenuItem();
+		~MenuItem();
 };

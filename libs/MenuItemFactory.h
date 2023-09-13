@@ -6,5 +6,6 @@ class MenuItemFactory {
     int id = 0;
 
  public:
-    MenuItem* create(std::string title, std::function<void()> callback);
+    MenuItem* create(std::string title, void (*callback)());
 };
+

@@ -15,5 +15,6 @@ add_executable(
   app.out
   main.cpp
   ./src/MenuItem.cpp
+  ./src/Menu.cpp
   ./src/MenuItemFactory.cpp
 )

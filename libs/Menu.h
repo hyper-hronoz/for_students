@@ -1,29 +1,28 @@
 #pragma once
 
+#include "MenuItem.h"
 #include "iostream"
 #include "vector"
-#include "MenuItem.h"
 
 class Menu {
- private:
-    std::string title;
-    std::vector<MenuItem*> menuItems;
+	private:
+		std::string title;
+		std::vector<MenuItem *> menuItems;
 
- public:
-    explicit Menu();
+	public:
+		explicit Menu();
 
-    Menu(std::string name);
+		Menu(std::string name);
 
-    ~Menu();
+		~Menu();
 
-    void append(MenuItem* menuItem);
+		void append(MenuItem *menuItem);
 
-    void print();
+		void print();
 
-    void setName(std::string name);
+		void setName(std::string name);
 
-    std::string getName();
+		std::string getName();
 
-    void awaitUserInput();
+		void awaitUserInput();
 };
-
