@@ -9,9 +9,21 @@ using namespace std;
 int main() {
 	List<int32_t> *list = new List<int32_t>();
 
-	list->append(12);
-	list->append(12);
-	list->append(12);
+	list->append(1);
+	list->remove(0);
+	list->append(2);
+	list->remove(0);
+	list->append(3);
+	list->remove(0);
+	list->append(4);
+	list->remove(0);
+	list->append(5);
+
+	// list->remove(4);
+	//
+	list->append(1000);
+	// list->append(15);
+	cout << list->getLength() << endl;
 
 	for (ListItem item : (*list)) {
 		cout << item.getValue() << endl;

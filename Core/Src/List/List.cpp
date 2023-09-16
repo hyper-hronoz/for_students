@@ -53,9 +53,9 @@ List_Template
 	ListItem_t *current = root;
 	ListItem_t *next = root;
 
-	if (index == this->length - 1) {
-		delete current;
-	}
+	// if (index == 0 && this->length == 1) {
+	// 	delete current;
+	// }
 
 	if (index == 0 && this->length > 1) {
 		next = current->getNext();
@@ -70,7 +70,7 @@ List_Template
 		current = current->getNext();
 	}
 
-	if (0 < index && index < this->length - 1) {
+	if (0 < index && index <= this->length - 1) {
 		next = current->getNext();
 		delete current;
 		prev->setNext(next);
