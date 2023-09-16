@@ -8,13 +8,9 @@ List_Template void List_t::append(ListItem_t *current, uint64_t index) {
 	ListItem_t *next = this->root;
 	ListItem_t *prev = this->root;
 
-	if (index == 0 && this->length > 1) {
+	if (index == 0 && this->length >= 1) {
 		current->setNext(this->root);
 		this->root = current;
-	}
-
-	if (index == this->length - 1 && index != 0) {
-		this->append(current);
 	}
 
 	for (uint64_t i = 0; i < index; i++) {
@@ -24,7 +20,7 @@ List_Template void List_t::append(ListItem_t *current, uint64_t index) {
 		next = next->getNext();
 	}
 
-	if (0 < index && index < this->length - 1) {
+	if ((0 < index && index < this->length - 1) || (index == this->length - 1 && index != 0)) {
 		current->setNext(next);
 		prev->setNext(current);
 	}

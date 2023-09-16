@@ -18,10 +18,14 @@ int main() {
 	list->append(4);
 	list->remove(0);
 	list->append(5);
+	list->remove(0);
 
-	// list->remove(4);
-	//
-	list->append(1000);
+	list->append(100, 0);
+	list->append(1000, 0);
+	list->append(10000, 0);
+	list->append(100000, 0);
+	list->append(1000000, 1);
+	// list->append(1000000, 1);
 	// list->append(15);
 	cout << list->getLength() << endl;
 
