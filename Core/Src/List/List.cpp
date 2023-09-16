@@ -1,12 +1,12 @@
 #include "List.h"
 
-List::List() {
+List_r::List() {
 	this->length = 0;
 };
 
-void List::append(ListItem *current, uint64_t index) {
-	ListItem *next = this->root;
-	ListItem *prev = this->root;
+List_Template void List_t::append(ListItem_t *current, uint64_t index) {
+	ListItem_t *next = this->root;
+	ListItem_t *prev = this->root;
 
 	if (index == 0 && this->length > 1) {
 		current->setNext(this->root);
@@ -32,24 +32,26 @@ void List::append(ListItem *current, uint64_t index) {
 	this->length++;
 }
 
-void List::append(ListItem *item) {
+List_Template void List_t::append(ListItem_t *item) {
 	if (this->length == 0) {
 		this->root = item;
 		this->length++;
 		return;
 	}
 	this->length++;
-	ListItem *current = root;
+	ListItem_t *current = root;
 	while (current->getNext()) {
 		current = current->getNext();
 	}
 	current->setNext(item);
 }
 
-int8_t List::remove(uint64_t index) {
-	ListItem *prev = root;
-	ListItem *current = root;
-	ListItem *next = root;
+List_Template
+	int8_t
+	List_t::remove(uint64_t index) {
+	ListItem_t *prev = root;
+	ListItem_t *current = root;
+	ListItem_t *next = root;
 
 	if (index == this->length - 1) {
 		delete current;
@@ -79,56 +81,79 @@ int8_t List::remove(uint64_t index) {
 	return 1;
 }
 
-uint64_t List::getLength() {
+List_Template
+	uint64_t
+	List_t::getLength() {
 	return this->length;
 }
 
-ListItem *List::getRoot() {
+List_Template
+	ListItem_t *
+	List_t::getRoot() {
 	return this->root;
 }
 
-List::Iterator List::begin() {
+List_Template
+	typename List_t::Iterator
+	List_t::begin() {
 	return Iterator(0, this);
 }
 
-List::Iterator List::end() {
+List_Template
+	typename List_t::Iterator
+	List_t::end() {
 	return Iterator(this->length, this);
 }
 
-static ListItem *returnValue = 0;
-ListItem &List::operator[](uint64_t index) {
+List_Template ListItem_t &List_t::operator[](uint64_t index) {
 	if (index >= this->length) {
 		exit(0);
 	}
-	ListItem *current = this->root;
+	ListItem_t *current = this->root;
 	for (int i = 0; i < index; i++) {
 		current = current->getNext();
 	}
-	returnValue = current;
-	return *returnValue;
+	return *current;
 }
 
-List::Iterator &List::Iterator::operator++() {
+List_Template
+	typename List_t::Iterator &
+	List_t::Iterator::operator++() {
 	this->iterator++;
 	return *this;
 };
 
-List::Iterator List::Iterator::operator++(int) {
+List_Template
+	typename List_t::Iterator
+	List_t::Iterator::operator++(int) {
 	Iterator tmp = *this;
 	++(*this);
 	return tmp;
 };
 
-List::Iterator::Iterator(uint64_t iterator, List *parent) : iterator(iterator), parent(parent){};
+List_Template
+List_t::Iterator::Iterator(uint64_t iterator, List_t *parent) : iterator(iterator), parent(parent){};
 
-ListItem &List::Iterator::operator*() {
+List_Template
+	ListItem_t &
+	List_t::Iterator::operator*() {
 	return (*this->parent)[iterator];
 };
 
-bool List::Iterator::operator==(const Iterator &rhs) {
+List_Template bool List_t::Iterator::operator==(const Iterator &rhs) {
 	return this->iterator == rhs.iterator;
 }
 
-bool List::Iterator::operator!=(const Iterator &rhs) {
+List_Template bool List_t::Iterator::operator!=(const Iterator &rhs) {
 	return !(this->iterator == rhs.iterator);
+}
+
+List_Template void List_t::append(T item) {
+	ListItem_t *newItem = new ListItem_t(item);
+	this->append(newItem);
+}
+
+List_Template void List_t::append(T item, uint64_t index) {
+	ListItem_t *newItem = new ListItem_t(item);
+	this->append(newItem, index);
 }

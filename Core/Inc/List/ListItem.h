@@ -1,19 +1,24 @@
 #pragma once
 
 #include <cstdint>
-class ListItem {
-	private:
-		ListItem *next;
-		int32_t value;
 
-	public:
-		ListItem(int32_t);
+#define ListItem_c template <class T> \
+class ListItem
+#define ListItem_t ListItem<T>
 
-		void setValue(int32_t);
+ListItem_c {
+private:
+	ListItem_t *next;
+	T value;
 
-		int32_t getValue();
+public:
+	ListItem(T);
 
-		ListItem *getNext();
+	void setValue(T);
 
-		void setNext(ListItem *);
+	T getValue();
+
+	ListItem_t *getNext();
+
+	void setNext(ListItem_t *);
 };

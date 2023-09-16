@@ -7,32 +7,11 @@
 using namespace std;
 
 int main() {
-	List *list = new List();
+	List<int32_t> *list = new List<int32_t>();
 
-	list->append(new ListItem(12));
-	list->append(new ListItem(13));
-	list->append(new ListItem(14));
-	list->append(new ListItem(-14));
-	list->append(new ListItem(-11));
-	list->append(new ListItem(-10));
-	list->append(new ListItem(-9));
-	list->append(new ListItem(-8));
-	list->append(new ListItem(-2), 0);
-	list->append(new ListItem(-2), 0);
-	list->append(new ListItem(3), 3);
-	list->append(new ListItem(3), 3);
-	list->append(new ListItem(3), 3);
-	list->append(new ListItem(3), 3);
-	list->append(new ListItem(3), 3);
-	list->append(new ListItem(3), 10);
-
-	// cout << list->getLength() << endl;
-
-	// ListItem value = (*list)[3];
-	// cout << value.getValue() << endl;
-
-	// auto i = (*list).begin();
-	// auto b = (*list).end();
+	list->append(12);
+	list->append(12);
+	list->append(12);
 
 	for (ListItem item : (*list)) {
 		cout << item.getValue() << endl;

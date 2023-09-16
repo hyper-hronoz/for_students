@@ -1,22 +1,29 @@
 #include "ListItem.h"
 
-ListItem::ListItem(int32_t value) {
+template<class T>
+ListItem<T>::ListItem(T value) {
 	this->value = value;
 	this->next = nullptr;
 }
 
-void ListItem::setValue(int32_t value) {
+template<class T>
+void ListItem<T>::setValue(T value) {
 	this->value = value;
 }
 
-int32_t ListItem::getValue() {
+template<class T>
+T ListItem<T>::getValue() {
 	return this->value;
 }
 
-ListItem *ListItem::getNext() {
+template<class T>
+ListItem<T> *ListItem<T>::getNext() {
 	return this->next;
 }
 
-void ListItem::setNext(ListItem *item) {
+template<class T>
+void ListItem<T>::setNext(ListItem<T> *item) {
 	this->next = item;
 }
+
+template class ListItem<int32_t>;

@@ -2,51 +2,63 @@
 #include "ListItem.h"
 #include <cstdlib>
 
-class List {
-	private:
-		ListItem *root;
+#define List_Template template <class T>
 
-		ListItem *prev;
+#define List_c List_Template class List
+#define List_r List_Template \
+	List<T>
+#define List_t List<T>
 
-		uint32_t *pointers;
-		uint64_t length;
+List_c {
+private:
+	ListItem_t *root;
 
-		class Iterator {
-			private:
-				uint64_t iterator;
-				List *parent;
+	ListItem_t *prev;
 
-			public:
-				Iterator(uint64_t, List *);
+	uint64_t length;
 
-				Iterator &operator++();
+	class Iterator {
+		private:
+			uint64_t iterator;
+			List_t *parent;
 
-				Iterator operator++(int);
+		public:
+			Iterator(uint64_t, List *);
 
-				ListItem &operator*();
+			Iterator &operator++();
 
-				bool operator==(const Iterator &);
+			Iterator operator++(int);
 
-				bool operator!=(const Iterator &);
-		};
+			ListItem_t &operator*();
 
-	public:
-		Iterator begin();
-		Iterator end();
+			bool operator==(const Iterator &);
 
-		ListItem &operator[](uint64_t);
+			bool operator!=(const Iterator &);
+	};
 
-		explicit List();
+public:
+	Iterator begin();
+	Iterator end();
 
-		void append(ListItem *);
+	ListItem_t &operator[](uint64_t);
 
-		void append(ListItem *, uint64_t);
+	explicit List_t();
 
-		int8_t remove(uint64_t);
+	void append(T);
 
-		void clear();
+	void append(T, uint64_t);
 
-		ListItem *getRoot();
+	void append(ListItem_t *);
 
-		uint64_t getLength();
+	void append(ListItem_t *, uint64_t);
+
+	int8_t remove(uint64_t);
+
+	void clear();
+
+	ListItem_t *getRoot();
+
+	uint64_t getLength();
 };
+
+template class List<int32_t>;
