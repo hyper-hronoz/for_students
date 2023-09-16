@@ -17,14 +17,16 @@ int main() {
 	list->append(new ListItem(-10));
 	list->append(new ListItem(-9));
 	list->append(new ListItem(-8));
+	list->append(new ListItem(-2), 0);
+	list->append(new ListItem(-2), 0);
+	list->append(new ListItem(3), 3);
+	list->append(new ListItem(3), 3);
+	list->append(new ListItem(3), 3);
+	list->append(new ListItem(3), 3);
+	list->append(new ListItem(3), 3);
+	list->append(new ListItem(3), 10);
 
-	// list->remove(0);
 	// cout << list->getLength() << endl;
-	list->remove(1);
-	list->remove(1);
-	// list->remove(0);
-	cout << list->getLength() << endl;
-	// list->remove(2);
 
 	// ListItem value = (*list)[3];
 	// cout << value.getValue() << endl;

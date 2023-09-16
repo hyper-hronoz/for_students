@@ -40,6 +40,8 @@ class List {
 
 		void append(ListItem *);
 
+		void append(ListItem *, uint64_t);
+
 		int8_t remove(uint64_t);
 
 		void clear();

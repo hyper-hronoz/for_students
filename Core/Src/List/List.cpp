@@ -4,6 +4,34 @@ List::List() {
 	this->length = 0;
 };
 
+void List::append(ListItem *current, uint64_t index) {
+	ListItem *next = this->root;
+	ListItem *prev = this->root;
+
+	if (index == 0 && this->length > 1) {
+		current->setNext(this->root);
+		this->root = current;
+	}
+
+	if (index == this->length - 1 && index != 0) {
+		this->append(current);
+	}
+
+	for (uint64_t i = 0; i < index; i++) {
+		if (i == index - 1) {
+			prev = next;
+		}
+		next = next->getNext();
+	}
+
+	if (0 < index && index < this->length - 1) {
+		current->setNext(next);
+		prev->setNext(current);
+	}
+
+	this->length++;
+}
+
 void List::append(ListItem *item) {
 	if (this->length == 0) {
 		this->root = item;
