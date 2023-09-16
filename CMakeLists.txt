@@ -4,17 +4,21 @@ project("singly_linked_dynamic_list")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_BUILD_TYPE Debug)
 
 include_directories(
   thisapp 
   PRIVATE
-  ${PROJECT_SOURCE_DIR}/libs
+  ${PROJECT_SOURCE_DIR}/Core/Inc/Menu
+  ${PROJECT_SOURCE_DIR}/Core/Inc/List
 )
 
 add_executable(
   app.out
   main.cpp
-  ./src/MenuItem.cpp
-  ./src/Menu.cpp
-  ./src/MenuItemFactory.cpp
+  Core/Src/Menu/Menu.cpp
+  Core/Src/Menu/MenuItem.cpp
+  Core/Src/Menu/MenuItemFactory.cpp
+  Core/Src/List/ListItem.cpp
+  Core/Src/List/List.cpp
 )

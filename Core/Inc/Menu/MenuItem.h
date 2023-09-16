@@ -1,20 +1,21 @@
 #pragma once
 #include "iostream"
+#include <cstdint>
 
 class MenuItem {
 	private:
 		std::string title;
-		int id;
+		uint16_t id;
 		void (*callback)();
 
 	public:
-		MenuItem(int id, std::string title);
+		MenuItem(uint16_t id, std::string title);
 
-		MenuItem(int id, std::string title, void (*callback)());
+		MenuItem(uint16_t id, std::string title, void (*callback)());
 
 		std::string getTitle();
 
-		int getId();
+		uint16_t getId();
 
 		void executeCallback();
 

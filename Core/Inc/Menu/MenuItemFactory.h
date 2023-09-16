@@ -3,7 +3,7 @@
 
 class MenuItemFactory {
  private:
-    int id = 0;
+    uint16_t id = 0;
 
  public:
     MenuItem* create(std::string title, void (*callback)());
