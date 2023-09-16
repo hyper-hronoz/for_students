@@ -33,31 +33,46 @@ int main() {
 		cout << item.getValue() << endl;
 	}
 
-	delete list;
 	// for (int i = 0; i < list->getLength(); i++) {
 	// 	list[i];
 	// }
 
-	// Menu *menu = new Menu();
-	//
-	// MenuItemFactory *menuItemFactory = new MenuItemFactory();
-	//
-	// menu->append(menuItemFactory->create("append", []() {
-	// 	std::cout << "Fuck this world" << std::endl;
-	// }));
-	//
-	// menu->append(menuItemFactory->create("remove", []() {
-	//
-	// }));
-	//
-	// menu->append(menuItemFactory->create("replace", []() {
-	//
-	// }));
-	//
-	// menu->awaitUserInput();
-	//
-	// delete menuItemFactory;
-	// delete menu;
+	Menu *menu = new Menu();
+
+	MenuItemFactory *menuItemFactory = new MenuItemFactory();
+
+	menu->append(menuItemFactory->create("append", [&]() {
+		uint32_t newValue = 0;
+		cout << "Input newValue: "; cin >> newValue; cout << endl;
+		list->append(newValue);
+	}));
+
+	menu->append(menuItemFactory->create("remove", [&]() {
+		uint32_t index = 0;
+		cout << "Input index to be removed: "; cin >> index; cout << endl;
+		list->remove(index);
+	}));
+
+	menu->append(menuItemFactory->create("replace", [list]() {
+		uint32_t newValue = 0;
+		uint32_t index = 0;
+		cout << "Input index to be removed: "; cin >> index; cout << endl;
+		cout << "Input newValue: "; cin >> newValue; cout << endl;
+		list->remove(index);
+		list->append(newValue, index);
+	}));
+
+	menu->append(menuItemFactory->create("print", [list]() {
+		for (ListItem item : (*list)) {
+			cout << item.getValue() << endl;
+		}
+	}));
+
+	menu->awaitUserInput();
+
+	delete menuItemFactory;
+	delete menu;
+	delete list;
 	uint32_t t;
 
 	return 0;

@@ -5,7 +5,7 @@ MenuItem::MenuItem(uint16_t id, std::string title) {
   this->id = id;
 }
 
-MenuItem::MenuItem(uint16_t id, std::string title, void (*callback)()) : MenuItem(id, title) {
+MenuItem::MenuItem(uint16_t id, std::string title, std::function<void()> callback) : MenuItem(id, title) {
   this->callback = callback;
   this->id = id;
 }
