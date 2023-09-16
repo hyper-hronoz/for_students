@@ -1,8 +1,8 @@
+#include "List.h"
+#include "ListItem.h"
 #include "Menu.h"
 #include "MenuItemFactory.h"
 #include "iostream"
-#include "ListItem.h"
-#include "List.h"
 
 using namespace std;
 
@@ -13,11 +13,18 @@ int main() {
 	list->append(new ListItem(13));
 	list->append(new ListItem(14));
 	list->append(new ListItem(-14));
+	list->append(new ListItem(-11));
+	list->append(new ListItem(-10));
+	list->append(new ListItem(-9));
+	list->append(new ListItem(-8));
 
-	ListItem *root = list->getRoot();
-	ListItem *first = root->getNext();
-	ListItem *second = first->getNext();
-	ListItem *third = second->getNext();
+	// list->remove(0);
+	// cout << list->getLength() << endl;
+	list->remove(1);
+	list->remove(1);
+	// list->remove(0);
+	cout << list->getLength() << endl;
+	// list->remove(2);
 
 	// ListItem value = (*list)[3];
 	// cout << value.getValue() << endl;

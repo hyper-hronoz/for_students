@@ -7,13 +7,13 @@ class ListItem {
 		int32_t value;
 
 	public:
-		ListItem(int32_t value);
+		ListItem(int32_t);
 
-		void setValue(int32_t value);
+		void setValue(int32_t);
 
 		int32_t getValue();
 
-		ListItem* getNext();
+		ListItem *getNext();
 
-		void setNext(ListItem *item);
+		void setNext(ListItem *);
 };

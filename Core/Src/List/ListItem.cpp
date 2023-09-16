@@ -2,6 +2,7 @@
 
 ListItem::ListItem(int32_t value) {
 	this->value = value;
+	this->next = nullptr;
 }
 
 void ListItem::setValue(int32_t value) {

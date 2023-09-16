@@ -7,7 +7,6 @@ class List {
 		ListItem *root;
 
 		ListItem *prev;
-		ListItem *current;
 
 		uint32_t *pointers;
 		uint64_t length;
@@ -26,13 +25,9 @@ class List {
 
 				ListItem &operator*();
 
-				bool operator==(const Iterator &rhs) {
-					return this->iterator == rhs.iterator;
-				}
+				bool operator==(const Iterator &);
 
-				bool operator!=(const Iterator &rhs) {
-					return !(this->iterator == rhs.iterator);
-				}
+				bool operator!=(const Iterator &);
 		};
 
 	public:
@@ -43,9 +38,9 @@ class List {
 
 		explicit List();
 
-		void append(ListItem *item);
+		void append(ListItem *);
 
-		void remove(uint64_t index);
+		int8_t remove(uint64_t);
 
 		void clear();
 

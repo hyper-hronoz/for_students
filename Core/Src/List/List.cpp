@@ -11,14 +11,44 @@ void List::append(ListItem *item) {
 		return;
 	}
 	this->length++;
-	this->current = root;
+	ListItem *current = root;
 	while (current->getNext()) {
-		this->current = current->getNext();
+		current = current->getNext();
 	}
-	this->current->setNext(item);
+	current->setNext(item);
 }
 
-void List::remove(uint64_t index) {
+int8_t List::remove(uint64_t index) {
+	ListItem *prev = root;
+	ListItem *current = root;
+	ListItem *next = root;
+
+	if (index == this->length - 1) {
+		delete current;
+	}
+
+	if (index == 0 && this->length > 1) {
+		next = current->getNext();
+		delete current;
+		this->root = next;
+	}
+
+	for (uint64_t i = 0; i < index; i++) {
+		if (i == index - 1) {
+			prev = current;
+		}
+		current = current->getNext();
+	}
+
+	if (0 < index && index < this->length - 1) {
+		next = current->getNext();
+		delete current;
+		prev->setNext(next);
+	}
+
+	this->length--;
+
+	return 1;
 }
 
 uint64_t List::getLength() {
@@ -63,6 +93,14 @@ List::Iterator List::Iterator::operator++(int) {
 
 List::Iterator::Iterator(uint64_t iterator, List *parent) : iterator(iterator), parent(parent){};
 
-ListItem& List::Iterator::operator*(){
+ListItem &List::Iterator::operator*() {
 	return (*this->parent)[iterator];
 };
+
+bool List::Iterator::operator==(const Iterator &rhs) {
+	return this->iterator == rhs.iterator;
+}
+
+bool List::Iterator::operator!=(const Iterator &rhs) {
+	return !(this->iterator == rhs.iterator);
+}
