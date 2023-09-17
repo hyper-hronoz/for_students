@@ -1,5 +1,6 @@
 #pragma once
 #include "ListItem.h"
+#include "iostream"
 #include <cstdlib>
 
 #define List_Template template <class T>
@@ -55,6 +56,28 @@ public:
 	int8_t remove(uint64_t);
 
 	void clear();
+
+	void sort(uint8_t invert = 0) {
+		for (uint64_t i = 0; i < this->length; i++) {
+
+			for (uint64_t j = 0; j < this->length - i - 1; j++) {
+				ListItem_t *current = &(*this)[j];
+				ListItem_t *next = &(*this)[j + 1];
+
+				if (current->getValue() > next->getValue() && !invert) {
+					T temp = current->getValue();
+					current->setValue(next->getValue());
+					next->setValue(temp);
+				}
+
+				if (current->getValue() < next->getValue() && invert) {
+					T temp = current->getValue();
+					current->setValue(next->getValue());
+					next->setValue(temp);
+				}
+			}
+		}
+	};
 
 	ListItem_t *getRoot();
 

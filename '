@@ -150,15 +150,16 @@ List_Template void List_t::append(T item) {
 }
 
 List_Template void List_t::append(T item, uint64_t index) {
-	ListItem_t *newItem = new ListItem_t(item);
-	this->append(newItem, index);
+	ListItem_t *newItem = new ListItem_t(item); this->append(newItem, index);
 }
 
-List_Template
-	ListItem_t *
-	swap(ListItem_t *ptr1, ListItem_t *ptr2) {
-	ListItem_t *tmp = ptr2->getNext();
-	ptr2->setNext(ptr1);
-	ptr1->setNext(tmp);
-	return ptr2;
+List_Template void List_t::sort() {
+	for (uint64_t i = 0; i < this->length; i++) {
+		for (uint64_t j = 0; j < this->length - i - 1; j++) {
+			if ((*this)[j].getValue() > (*this)[j + 1].getValue()) {
+				ListItem_t temp = (*this)[j];
+				(*this)[j] = (*this)[j + 1];
+			}
+		}
+	}
 }
