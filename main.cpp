@@ -10,12 +10,18 @@ using namespace std;
 int main() {
 	List<int32_t> *list = new List<int32_t>();
 
-	list->append(0);
 	list->append(1);
+	list->append(-4);
 	list->append(2);
-	list->append(3);
 	list->append(4);
+	list->append(-1);
+	list->append(-2);
 	list->append(5);
+	list->append(-3);
+	list->append(3);
+	list->append(0);
+	list->append(-5);
+	list->append(0);
 
 	Menu *menu = new Menu();
 
@@ -51,7 +57,7 @@ int main() {
 		cout << endl;
 		list->remove(index);
 	}));
-	menu->append(menuItemFactory->create("replace", [list]() {
+	menu->append(menuItemFactory->create("replace", [&]() {
 		uint32_t newValue = 0;
 		uint32_t index = 0;
 		cout << "Input index to be removed: ";
@@ -64,42 +70,50 @@ int main() {
 		list->append(newValue, index);
 	}));
 
-	menu->append(menuItemFactory->create("print", [list]() {
+	menu->append(menuItemFactory->create("print", [&]() {
+		cout << list << endl;
+		cout << &list << endl;
 		for (ListItem item : (*list)) {
 			cout << item.getValue() << endl;
 		}
 	}));
 
-	menu->append(menuItemFactory->create("sort", [list]() {
+	menu->append(menuItemFactory->create("sort", [&]() {
 		list->sort();
 	}));
 
-	menu->append(menuItemFactory->create("sort reverse", [list]() {
+	menu->append(menuItemFactory->create("sort reverse", [&]() {
 		list->sort(1);
 	}));
 
+	int number;
 	menu->append(menuItemFactory->create("sort by task", [&]() {
 		List<int32_t> *negatives = new List<int32_t>();
 		List<int32_t> *positives = new List<int32_t>();
-
 		List<int32_t> *newList = new List<int32_t>();
+		number++;
+
+		cout << number << endl;
+		cout << list << endl;
+		cout << &list << endl;
 
 		for (ListItem item : (*list)) {
 			if (item.getValue() < 0) {
-				negatives->append(&item);
+				negatives->append(item.getValue());
 			} else {
-				positives->append(&item);
+				positives->append(item.getValue());
 			}
 		}
+
 		negatives->sort(1);
 		positives->sort();
 
 		for (ListItem item : (*negatives)) {
-			newList->append(&item);
+			newList->append(item.getValue());
 		}
 
 		for (ListItem item : (*positives)) {
-			newList->append(&item);
+			newList->append(item.getValue());
 		}
 
 		delete list;
@@ -149,7 +163,6 @@ int main() {
 	delete menuItemFactory;
 	delete menu;
 	delete list;
-	uint32_t t;
 
 	return 0;
 }
