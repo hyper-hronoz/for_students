@@ -1,31 +1,40 @@
 #include "List.h"
+#include "Log.h"
 
 List_r::List() {
 	this->length = 0;
 };
 
 List_Template void List_t::append(ListItem_t *current, uint64_t index) {
-	ListItem_t *next = this->root;
-	ListItem_t *prev = this->root;
-
-	if (index == 0 && this->length >= 1) {
-		current->setNext(this->root);
-		this->root = current;
-	}
-
-	for (uint64_t i = 0; i < index; i++) {
-		if (i == index - 1) {
-			prev = next;
+	try {
+		if (index < 0 || index > this->length - 1) {
+			throw std::out_of_range("Out of range in method append");
 		}
-		next = next->getNext();
-	}
+		ListItem_t *next = this->root;
+		ListItem_t *prev = this->root;
 
-	if ((0 < index && index < this->length - 1) || (index == this->length - 1 && index != 0)) {
-		current->setNext(next);
-		prev->setNext(current);
-	}
+		if (index == 0 && this->length >= 1) {
+			current->setNext(this->root);
+			this->root = current;
+		}
 
-	this->length++;
+		for (uint64_t i = 0; i < index; i++) {
+			if (i == index - 1) {
+				prev = next;
+			}
+			next = next->getNext();
+		}
+
+		if ((0 < index && index < this->length - 1) || (index == this->length - 1 && index != 0)) {
+			current->setNext(next);
+			prev->setNext(current);
+		}
+
+		this->length++;
+	} catch (std::out_of_range e) {
+		std::cout << e.what() << std::endl;
+		Log::writeLog(e.what());
+	}
 }
 
 List_Template void List_t::append(ListItem_t *item) {
@@ -45,36 +54,42 @@ List_Template void List_t::append(ListItem_t *item) {
 List_Template
 	int8_t
 	List_t::remove(uint64_t index) {
-	ListItem_t *prev = root;
-	ListItem_t *current = root;
-	ListItem_t *next = root;
+	try {
 
-	// if (index == 0 && this->length == 1) {
-	// 	delete current;
-	// }
-
-	if (index == 0 && this->length > 1) {
-		next = current->getNext();
-		delete current;
-		this->root = next;
-	}
-
-	for (uint64_t i = 0; i < index; i++) {
-		if (i == index - 1) {
-			prev = current;
+		if (index < 0 || index > this->length - 1) {
+			throw std::out_of_range("index out of range when removing");
 		}
-		current = current->getNext();
+
+		ListItem_t *prev = root;
+		ListItem_t *current = root;
+		ListItem_t *next = root;
+
+		if (index == 0 && this->length > 1) {
+			next = current->getNext();
+			delete current;
+			this->root = next;
+		}
+
+		for (uint64_t i = 0; i < index; i++) {
+			if (i == index - 1) {
+				prev = current;
+			}
+			current = current->getNext();
+		}
+
+		if (0 < index && index <= this->length - 1) {
+			next = current->getNext();
+			delete current;
+			prev->setNext(next);
+		}
+
+		this->length--;
+
+		return 1;
+	} catch (std::out_of_range e) {
+		std::cout << e.what() << std::endl;
+		Log::writeLog(e.what());
 	}
-
-	if (0 < index && index <= this->length - 1) {
-		next = current->getNext();
-		delete current;
-		prev->setNext(next);
-	}
-
-	this->length--;
-
-	return 1;
 }
 
 List_Template

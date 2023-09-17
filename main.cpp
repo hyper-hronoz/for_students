@@ -10,12 +10,12 @@ using namespace std;
 int main() {
 	List<int32_t> *list = new List<int32_t>();
 
-	// list->append(0);
-	// list->append(1);
-	// list->append(2);
-	// list->append(3);
-	// list->append(4);
-	// list->append(5);
+	list->append(0);
+	list->append(1);
+	list->append(2);
+	list->append(3);
+	list->append(4);
+	list->append(5);
 
 	Menu *menu = new Menu();
 
@@ -29,6 +29,21 @@ int main() {
 		list->append(newValue);
 	}));
 
+	menu->append(menuItemFactory->create("append to", [&]() {
+		uint32_t newValue = 0;
+		uint64_t position = 0;
+
+		cout << "Input newValue: ";
+		cin >> newValue;
+		cout << endl;
+
+		cout << "Input position: ";
+		cin >> position;
+		cout << endl;
+
+		list->append(newValue, position);
+	}));
+
 	menu->append(menuItemFactory->create("remove", [&]() {
 		uint32_t index = 0;
 		cout << "Input index to be removed: ";
@@ -36,7 +51,6 @@ int main() {
 		cout << endl;
 		list->remove(index);
 	}));
-
 	menu->append(menuItemFactory->create("replace", [list]() {
 		uint32_t newValue = 0;
 		uint32_t index = 0;
@@ -99,7 +113,9 @@ int main() {
 	}));
 
 	menu->append(menuItemFactory->create("load from file", [&list]() {
-		ifstream stream("test.txt", ios::binary);
+		std::string filename;
+		cout << "Input file name: "; cin >> filename;
+		ifstream stream(filename, ios::binary);
 
 		uint64_t length;
 		stream.read((char *)&length, sizeof(uint64_t));
@@ -115,7 +131,9 @@ int main() {
 	}));
 
 	menu->append(menuItemFactory->create("save to file", [&list]() {
-		ofstream stream("test.txt", ios::binary);
+		std::string filename;
+		cout << "Input file name: "; cin >> filename;
+		ofstream stream(filename, ios::binary);
 		uint64_t buffl = list->getLength();
 		stream.write((char *)&buffl, sizeof(uint64_t));
 		while (list->getLength()) {

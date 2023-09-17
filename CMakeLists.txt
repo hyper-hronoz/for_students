@@ -11,6 +11,7 @@ include_directories(
   PRIVATE
   ${PROJECT_SOURCE_DIR}/Core/Inc/Menu
   ${PROJECT_SOURCE_DIR}/Core/Inc/List
+  ${PROJECT_SOURCE_DIR}/Core/Inc/Log
 )
 
 add_executable(
@@ -21,4 +22,5 @@ add_executable(
   Core/Src/Menu/MenuItemFactory.cpp
   Core/Src/List/ListItem.cpp
   Core/Src/List/List.cpp
+  Core/Src/Log/Log.cpp
 )
